@@ -251,7 +251,7 @@ if($perm_trans != 1 || $perm_trans == 1 && $bg_header == 'false' || $page_full_s
                         dynamic_sidebar( 'header-1' );
                         // show user real name so I know who's logged in (DEV ONLY)
                         if($FEUP->Is_Logged_In()) {
-                            echo "<div style='margin:20px 0 0 18px ;color:white;'>" .$FEUP->Get_Field_Value('Name') .'</div>';
+                            echo "<div style='margin:20px 0 0 18px ;color:white;'>" .$FEUP->Get_Field_Value('Name') .' : '. $FEUP->Get_User_Level_ID() . '</div>';
                         }
             ?>
 
@@ -289,6 +289,10 @@ if($perm_trans != 1 || $perm_trans == 1 && $bg_header == 'false' || $page_full_s
             $(".sf-menu").hide();
         }
     </script>
+
+
+    <?php echo '<div class="ns-loading-cover"></div>'; ?>
+
 </div><!--/header-outer-->
 
 <?php if(!empty($options['theme-skin']) && $options['theme-skin'] == 'ascend') { get_template_part('includes/header-search'); } ?>
@@ -320,13 +324,9 @@ if($perm_trans != 1 || $perm_trans == 1 && $bg_header == 'false' || $page_full_s
 </div>
 
 
-<!--  Turn off fade-in/out of page
 
 <div id="ajax-loading-screen" data-disable-fade-on-click="<?php echo (!empty($options['disable-transition-fade-on-click'])) ? $options['disable-transition-fade-on-click'] : '0' ; ?>" data-effect="<?php echo $page_transition_effect; ?>" data-method="<?php echo (!empty($options['transition-method'])) ? $options['transition-method'] : 'ajax' ; ?>">
 
--->
-
-<div id="ajax-loading-screen" data-disable-fade-on-click="1">
 
 	<?php if($page_transition_effect == 'center_mask_reveal') { ?>
 		<span class="mask-top"></span>
