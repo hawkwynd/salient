@@ -25,6 +25,9 @@ if(have_posts()) : while(have_posts()) : the_post();
 	nectar_page_header($post->ID); 
 
 endwhile; endif;
+
+
+
  if($fullscreen_header == true) {
 
 	if(empty($bg) && empty($bg_color)) { ?>
@@ -71,6 +74,9 @@ endwhile; endif;
  } ?>
 
 <!-- POST CONTENT BEGIN after FEU->isLoggedIn() -->
+
+
+
 
 <div class="container-wrap <?php echo ($fullscreen_header == true) ? 'fullscreen-blog-header': null; ?> <?php if($blog_type == 'std-blog-fullwidth' || $hide_sidebar == '1') echo 'no-sidebar'; ?>">
 

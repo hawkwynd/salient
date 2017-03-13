@@ -31,16 +31,25 @@ include('tech-support-section.php');
     if(have_posts()) : while(have_posts()) : the_post();
        echo '<div class="row" rel="incsub_wiki_template">';
 
-     /* if the FEU->Get_Field_Value 1st character of the value == "Y" for the post to edit, then display the button for edit */
-       if($action === false):
-        echo  substr( strtoupper($FEUP->Get_Field_Value( $post->post_title . ' Editor') ), 0,1)  == "Y" ? '<div style="margin-bottom: 12px;"><a style="padding: 15px 20px; border-radius: 25px; color: white; background-color: #263975;" href="'. get_permalink($post->ID) .'?action=edit">Edit '. $post->post_title . '</a><br/></div>' : '';
-  endif;
+     /*
+     * Here we check FEUP status, and we need to know if they have 'Editor' capabilities before
+      * displaying the edit link. Since the field is a string comprised of the wp_title + ' Editor'
+      * we'll inspect the title with appended ' Editor' and check if that word exists within the
+      * field Name for our user, and if it does, then we know they're an editor and display the link
+     */
+
+
+       if($action === false){
+        echo  substr( strtoupper($FEUP->Get_Field_Value( $post->post_title . ' Editor') ), 0,1)  == "Y" ? '<div class="wiki_editor_btn"><a href="'. get_permalink($post->ID) .'?action=edit">Edit '. $post->post_title . '</a> <span class="wiki_editor_btn"><a href="/agendas">Back to Agendas</a></span></div>' : '<div class="wiki_editor_btn"><a href="/agendas">Back to Agendas</a></div>';
+       }else{
+           echo '<div class="wiki_editor_btn"><a href="/agendas">Back to Agendas</a></div>';
+       }
+
 endwhile;
-endif; ?>
-
-
-        <!--- WIKI TEMPLATE CALL START -->
-    <?php
+endif;
+?>
+  <!--- WIKI TEMPLATE CALL START -->
+<?php
 
         echo '<div id="post-area" class="col span_9" rel="'.floatval(get_bloginfo('version')) .'" post-format="'. get_post_format() .'">';
         echo $action == false ? "<h3>" . $post->post_title. "</h3>" : '';
@@ -49,7 +58,7 @@ endif; ?>
 					
             if ( floatval(get_bloginfo('version')) < "3.6" ) {
                 //old post formats before they got built into the core
-                 get_template_part( 'includes/post-templates-pre-3-6/entry', get_post_format() );
+                get_template_part( 'includes/post-templates-pre-3-6/entry', get_post_format() );
             } else {
                 //WP 3.6+ post formats -- this one is the one we're using
                  get_template_part( 'includes/post-templates/entry', get_post_format() );

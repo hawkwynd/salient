@@ -14,6 +14,9 @@ global $layout; ?>
 	<div class="inner-wrap animated">
 
 		<div class="post-content">
+
+        <!-- link to go back to parent should show here -->
+
 			
 			<?php if( !is_single() ) { ?>
 				
@@ -196,7 +199,7 @@ global $layout; ?>
 				<?php 
 				if(is_single()){
 					//on the single post page display the content
-					the_content('<span class="continue-reading">'. __("Read More", NECTAR_THEME_NAME) . '</span>'); 
+					the_content('<span rel="scotty" class="continue-reading">'. __("Read More", NECTAR_THEME_NAME) . '</span>');
 				} ?>
 				
 				<?php global $options;

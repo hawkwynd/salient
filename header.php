@@ -251,7 +251,7 @@ if($perm_trans != 1 || $perm_trans == 1 && $bg_header == 'false' || $page_full_s
                         dynamic_sidebar( 'header-1' );
                         // show user real name so I know who's logged in (DEV ONLY)
                         if($FEUP->Is_Logged_In()) {
-                            echo "<div style='margin:20px 0 0 18px ;color:white;'>" .$FEUP->Get_Field_Value('Name') .' : '. $FEUP->Get_User_Level_ID() . '</div>';
+                            echo "<div style='margin:20px 0 0 18px ;color:white;'>" .$FEUP->Get_Field_Value('Name') .'</div>';
                         }
             ?>
 
